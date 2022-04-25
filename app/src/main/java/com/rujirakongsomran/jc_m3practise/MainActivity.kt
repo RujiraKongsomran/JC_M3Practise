@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CreateDialog()
+                    CreateBadgedBox()
                 }
             }
         }
@@ -54,6 +55,24 @@ fun CreateDialog() {
             dismissButton = {
                 TextButton(onClick = { openDialog.value = false }) {
                     Text(text = "Dismiss")
+                }
+            }
+        )
+    }
+}
+
+@Composable
+fun CreateBadgedBox() {
+    NavigationBar {
+        NavigationBarItem(
+            selected = false,
+            onClick = { },
+            icon = {
+                BadgedBox(badge = { Badge { Text(text = "8") } }) {
+                    Icon(
+                        Icons.Filled.Star,
+                        contentDescription = "Favorite"
+                    )
                 }
             }
         )
