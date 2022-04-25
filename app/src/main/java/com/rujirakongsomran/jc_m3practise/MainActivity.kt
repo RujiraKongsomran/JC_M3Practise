@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CenterAlignedTopAppBar()
+                    CreateCheckBox()
                 }
             }
         }
@@ -79,6 +79,16 @@ fun CenterAlignedTopAppBar() {
                 }
             }
         }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CreateCheckBox() {
+    val checkState = remember { mutableStateOf(true) }
+    Checkbox(
+        checked = checkState.value,
+        onCheckedChange = { checkState.value = it }
     )
 }
 
