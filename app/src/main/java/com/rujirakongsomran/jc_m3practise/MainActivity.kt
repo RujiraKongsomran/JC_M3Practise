@@ -3,10 +3,8 @@ package com.rujirakongsomran.jc_m3practise
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -14,6 +12,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,9 +28,40 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CreateCheckBox()
+                    CreateCircleProgressIndicator()
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun CreateCircleProgressIndicator() {
+    var progress by remember { mutableStateOf(0.1f) }
+
+    val animatedProgress by animateFloatAsState(
+        targetValue = progress,
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+    )
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        CircularProgressIndicator(
+            progress = animatedProgress,
+            modifier = Modifier.size(200.dp),
+            strokeWidth = 40.dp
+        )
+        Spacer(modifier = Modifier.requiredHeight(30.dp))
+        OutlinedButton(onClick = {
+            if (progress < 1) progress += 0.1f
+        }) {
+            Text("Increase")
+        }
+        OutlinedButton(onClick = {
+            if (progress > 0.1) progress -= 0.1f
+        }) {
+            Text("decrease")
         }
     }
 }
