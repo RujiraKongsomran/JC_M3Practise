@@ -26,10 +26,24 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CreateBottomAppBar()
+                    CreateSlider()
                 }
             }
         }
+    }
+}
+
+@Composable
+fun CreateSlider() {
+    var sliderPosition by remember { mutableStateOf(0f) }
+    Column {
+        Text(text = sliderPosition.toString())
+        Slider(
+            value = sliderPosition,
+            onValueChange = { sliderPosition = it },
+            valueRange = 0f..100f,
+            steps = 4
+        )
     }
 }
 
