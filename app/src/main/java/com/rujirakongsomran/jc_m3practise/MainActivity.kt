@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SelectableSurface()
+                    ToggleableSurface()
                 }
             }
         }
@@ -61,7 +61,22 @@ fun SelectableSurface() {
             textAlign = TextAlign.Center
         )
     }
+}
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ToggleableSurface() {
+    var checked by remember { mutableStateOf(false) }
+    Surface(
+        checked = checked,
+        onCheckedChange = { checked = !checked },
+        color = if (checked)
+            MaterialTheme.colorScheme.surfaceVariant
+        else
+            MaterialTheme.colorScheme.surface
+    ) {
+        Text(text = if (checked) "ON" else "OFF", textAlign = TextAlign.Center)
+    }
 }
 
 @Composable
