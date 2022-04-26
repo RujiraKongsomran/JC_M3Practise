@@ -12,6 +12,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rujirakongsomran.jc_m3practise.ui.theme.JC_M3PractiseTheme
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CreateSurface()
+                    SelectableSurface()
                 }
             }
         }
@@ -44,6 +45,23 @@ fun CreateSurface() {
     ) {
         Text(text = "Clickable Surface. Count: $count")
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SelectableSurface() {
+
+    var selected by remember { mutableStateOf(false) }
+    Surface(
+        selected = selected,
+        onClick = { selected = !selected }
+    ) {
+        Text(
+            text = if (selected) "Selected" else "Not Selected",
+            textAlign = TextAlign.Center
+        )
+    }
+
 }
 
 @Composable
