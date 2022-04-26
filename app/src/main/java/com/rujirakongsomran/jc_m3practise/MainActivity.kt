@@ -26,10 +26,23 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CreateSlider()
+                    CreateSurface()
                 }
             }
         }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CreateSurface() {
+    var count by remember { mutableStateOf(0) }
+    Surface(
+        onClick = {
+            count++
+        }
+    ) {
+        Text(text = "Clickable Surface. Count: $count")
     }
 }
 
