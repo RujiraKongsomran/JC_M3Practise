@@ -7,9 +7,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -28,10 +26,36 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CreateCircleProgressIndicator()
+                    CreateBottomAppBar()
                 }
             }
         }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CreateBottomAppBar() {
+    Scaffold(
+        bottomBar = {
+            BottomAppBar(
+                icons = {
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(Icons.Filled.Menu, contentDescription = "Localized description")
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(Icons.Filled.Edit, contentDescription = "Localized description")
+                    }
+                },
+                floatingActionButton = {
+                    FloatingActionButton(onClick = { /*TODO*/ }) {
+                        Icon(Icons.Filled.Add, contentDescription = "Localized description")
+                    }
+                }
+            )
+        }
+    ) {
+
     }
 }
 
